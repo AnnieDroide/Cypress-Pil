@@ -1,0 +1,20 @@
+{
+  "name": "vsc",
+  "version": "1.0.0",
+  "description": "Cypress Test Automatizados PIL",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "cypress",
+    "test",
+    "automation",
+    "PIL"
+  ],
+  "author": "Annie",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^12.17.2"
+  }
+}
