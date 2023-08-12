@@ -6,6 +6,10 @@ class EdenHeader2 {
   getImageLogo(){
     return cy.get("#header-logo");
   }
+
+  getImageNavbar(){
+    return cy.get (".estrellas");
+  }
 }
 
 export default new EdenHeader2();

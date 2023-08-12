@@ -8,6 +8,8 @@ class EdenHeaderLocators {
         //Sección de Búsqueda
         this.searchInput = "#espectaculoList";
         this.searchSuggestion = ".ui-menu-item"
+        //ejercicio
+        this.imageNavbar = ".estrellas"
     }
 }
 
@@ -35,5 +37,9 @@ export default class EdenHeader {
 
 
         }
-    
+    //ejercicio Agus verificar imagen
+
+getImageNavbar(){
+return cy.get (this.locators.imageNavbar);
+}
 }

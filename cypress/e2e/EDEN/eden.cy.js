@@ -57,6 +57,10 @@ edenHeader.getMenuButtons().each((button, $index) => {
     const eventTxt = 'Experiencia Queen "Champions of the World Tour 23" ';
     edenEvent.getEventTitle().should("have.text", eventTxt);
 
-
   });
+//Ejercicio Agus
+it("Verificar Imagen de la navbar", () => {
+  cy.visit("https://www.edenentradas.com.ar/");
+  edenHeader.getImageNavbar().should("be.visible");
+})
 });
