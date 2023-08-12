@@ -40,6 +40,6 @@ export default class EdenHeader {
     //ejercicio Agus verificar imagen
 
 getImageNavbar(){
-return cy.get (this.locators.imageNavbar);
+return cy.get (this.locators.imageNavbar).first();
 }
 }
