@@ -6,12 +6,24 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   it("Verificar subtitulos", () => {
     cy.visit("https://www.edenentradas.com.ar/");
     edenHome2.getSubTitles().first().should("contain.text", "BUSCAR EVENTO");
-    edenHome2.getSubTitles().last().should("contain.text", "CALENDARIO DE EVENTOS");
+    edenHome2
+      .getSubTitles()
+      .last()
+      .should("contain.text", "CALENDARIO DE EVENTOS");
   });
 
   it("Verificar menu", () => {
     cy.visit("https://www.edenentradas.com.ar/");
-    const menuBtn = ["HOME","TODOS","AGENDA DEL FINDE","RECITALES","TEATROS", "CUARTETOS","FESTIVALES","SALAS"];
+    const menuBtn = [
+      "HOME",
+      "TODOS",
+      "AGENDA DEL FINDE",
+      "RECITALES",
+      "TEATROS",
+      "CUARTETOS",
+      "FESTIVALES",
+      "SALAS",
+    ];
 
     menuBtn.forEach((txtBtn, $index) => {
       edenHeader2.getMenuButtons().eq($index).should("contain.text", txtBtn);
