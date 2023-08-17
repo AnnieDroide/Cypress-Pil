@@ -8,10 +8,15 @@ const edenHome = new EdenHome();
 const edenHeader = new EdenHeader();
 const edenEvent = new EdenEvent();
 
-
 describe("Test sobre la página EDEN ENTRADAS", () => {
+  beforeEach(() => {
+    cy.visit("/");
+    //Función para loguearse
+  });
+  afterEach(() => {
+    //Función para desloguearse
+  });
   it("Verificar subtitulos", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     const txtBuscar = "BUSCAR EVENTO";
     const txtCalendar = "CALENDARIO DE EVENTOS";
 
@@ -20,7 +25,6 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("verificar menu", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     const menuBtn = [
       "HOME",
       "TODOS",
@@ -47,7 +51,6 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("Verificar página de recitales", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     edenHeader.getMenuButtons().contains("RECITALES").click();
     //const newUrl = "https://www.edenentradas.com.ar/sitio/contenido/recitales";
     //cy.url().should("eq", newUrl);
@@ -55,7 +58,6 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("Verificar Imagen de Logo", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     edenHeader
       .getImageLogo()
       .should("be.visible")
@@ -68,7 +70,6 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("Verificar el funcionamiento del buscador", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     edenHeader.getSearchInput().type("Queen");
     edenHeader.getSearchSuggestion().click();
     const eventTxt = 'Experiencia Queen "Champions of the World Tour 23" ';
@@ -76,18 +77,14 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("JIRA-2012 verificar Titulo de Salas", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     edenHeader.getMenuButtons().contains("SALAS").click();
   });
   //Ejercicio Agus
   it("Verificar Imagen de la navbar", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
     edenHeader.getImageNavbar().should("be.visible");
   });
 
   it("Validación del calendario", () => {
-    cy.visit("https://www.edenentradas.com.ar/");
-
     const fechaActual = new Date();
     const diaActual = fechaActual.getDate();
     const mesActual = fechaActual.getMonth();
@@ -129,14 +126,52 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
       });
   });
 
-  it.only("Verificar nombre de salas", () => {
+  //REVISAR CUANDO FUNCIONE LA PÁGINA SALAS
+  it.skip("Verificar nombre de salas", () => {
     //cy.visit("https://www.edenentradas.com.ar/sitio/contenido/salas");
-    cy.visit("https://www.edenentradas.com.ar/");
+
     edenHeader.getMenuButtons().contains("SALAS").click();
 
-    edenSalas.getSalasBlock().each((block) => {
+    const titulosSalas = [
+      "Plaza de La Música",
+      "Sala de Rey",
+      "Refugio Guernica",
+      "Captain Blue XL",
+      "Teatro Cultural Cañada",
+      "Sala Agustín Tosco - Luz y Fuerza - Bº Centro",
+      "Sala de Las Américas",
+      "Studio Theater",
+      "Casa Babylon",
+    ];
+    //Validación de los títulos iterando por elemento
+    edenSalas.getSalasBlock().each((block, $index) => {
       cy.wrap(block).should("be.visible");
-      
+      cy.wrap(block).should("contain.text", titulosSalas[$index]);
+    });
+    //Validación de títulos por array
+    titulosSalas.forEach((titulo, $index) => {
+      edenSalas.getSalasBlock().eq($index).should("contain.text", titulo);
+    });
+  });
+
+  it.skip("Verificar nombre de salas con FIXTURE", () => {
+    //cy.visit("https://www.edenentradas.com.ar/sitio/contenido/salas");
+
+    edenHeader.getMenuButtons().contains("SALAS").click();
+
+    cy.fixture("salas-COMPLETAR.json").then((file) => {
+      //Validación de títulos por array
+      titulosSalas.forEach((titulo, $index) => {
+        edenSalas.getSalasBlock().eq($index).should("contain.text", sala.title);
+        edenSalas
+          .getSalasBlock()
+          .eq($index)
+          .should("contain.text", sala.adress);
+        edenSalas
+          .getSalasBlock()
+          .eq($index)
+          .should("contain.text", sala.howtogetto); // <= es correcto?
+      });
     });
   });
 });
