@@ -7,6 +7,7 @@ import edenSalas from "../../Page/edenSalas";
 const edenHome = new EdenHome();
 const edenHeader = new EdenHeader();
 const edenEvent = new EdenEvent();
+const utils = require("../../Page/utils");
 
 describe("Test sobre la página EDEN ENTRADAS", () => {
   beforeEach(() => {
@@ -89,40 +90,22 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
     edenHeader.getImageNavbar().should("be.visible");
   });
 
-  it("Validación del calendario", () => {
-    const fechaActual = new Date();
-    const diaActual = fechaActual.getDate();
-    const mesActual = fechaActual.getMonth();
-    const anioActual = fechaActual.getFullYear();
-
-    const meses = [
-      "Enero",
-      "Febrero",
-      "Marzo",
-      "Abril",
-      "Mayo",
-      "Junio",
-      "Julio",
-      "Agosto",
-      "Septiembre",
-      "Octubre",
-      "Noviembre",
-      "Diciembre",
-    ];
+  it.only("Validación del calendario", () => {
+    const [dia, mes, anio] = utils.getCompleteDate();
 
     //cy.log(fechaActual);
     //cy.log(diaActual);
     //cy.log(meses[mesActual]);
     //cy.log(anioActual);
 
-    edenHeader.getCalendarTitle().should("contain.text", meses[mesActual]);
-    edenHeader.getCalendarTitle().should("contain.text", anioActual);
+    edenHeader.getCalendarTitle().should("contain.text", mes);
+    edenHeader.getCalendarTitle().should("contain.text", anio);
 
     edenHeader
       .getCalendar()
       .find("td")
       .each((cuadradoDia, $index) => {
-        if ($index < diaActual) {
+        if ($index < dia) {
           cy.wrap(cuadradoDia).should(
             "have.class",
             "ui-datepicker-unselectable ui-state-disabled"
