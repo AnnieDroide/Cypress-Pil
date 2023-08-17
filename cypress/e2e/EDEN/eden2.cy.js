@@ -3,8 +3,15 @@ const edenHome2 = require("../../Page/edenHome2");
 const edenHeader2 = require("../../Page/edenHeader2");
 
 describe("Test sobre la página EDEN ENTRADAS", () => {
-  it("Verificar subtitulos", () => {
+  beforeEach(() => {
     cy.visit("/");
+    //Función para loguearse
+  });
+  afterEach(() => {
+    //Función para desloguearse
+  });
+
+  it("Verificar subtitulos", () => {
     edenHome2.getSubTitles().first().should("contain.text", "BUSCAR EVENTO");
     edenHome2
       .getSubTitles()
@@ -13,7 +20,6 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("Verificar menu", () => {
-    cy.visit("/");
     const menuBtn = [
       "HOME",
       "TODOS",
@@ -39,8 +45,6 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   });
 
   it("Verificar página de recitales", () => {
-    cy.visit("/");
-
     edenHeader2.getMenuButtons().eq(3).click();
   });
 });
