@@ -10,9 +10,12 @@ const edenEvent = new EdenEvent();
 
 describe("Test sobre la página EDEN ENTRADAS", () => {
   beforeEach(() => {
-    const tamPantalla = Cypress.env("viewportdesktop").device;
-    cy.viewport(tamPantalla);
-    cy.visit("/");
+    cy.openWeb();
+
+    // const tamPantalla = Cypress.env("viewportdesktop").device;
+    //cy.viewport(tamPantalla);
+    //cy.visit("/"); -- se elimina porque ya está incluído en cy.openweb
+
     //Función para loguearse
   });
   afterEach(() => {

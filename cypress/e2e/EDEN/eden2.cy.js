@@ -4,7 +4,10 @@ const edenHeader2 = require("../../Page/edenHeader2");
 
 describe("Test sobre la página EDEN ENTRADAS", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.openWeb();
+
+    //cy.visit("/"); -- se elimina porque ya está incluído en cy.openweb
+
     //Función para loguearse
   });
   afterEach(() => {
