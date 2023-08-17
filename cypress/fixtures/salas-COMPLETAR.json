@@ -1,0 +1,53 @@
+[ 
+    {
+        "title":"Plaza de La Música",
+        "address": "Coronel Olmedo y Costanera - Alberdi",
+        "how to get to":"A - A2 - A3 - A4 - A5"
+    },
+    {
+        "title": "Sala de Rey",
+        "address": "Humerto Primo 439 - Centro",
+        "how to get to": ""
+
+    },
+    {
+        "title": "Refugio Guernica",
+        "address": "Av. Tillard 115 - Ex Abasto",
+        "how to get to": ""
+    },
+    {
+        "title": "Captain Blue XL",
+        "address": "Bv. Las Heras 124 - Ex Abasto",
+        "how to get to": ""
+
+    },
+    {
+        "title": "Teatro Cultural Cañada",
+        "address": "Marcelo T. de Alvear y San Luis - Guemes",
+        "how to get to": ""
+       
+    },
+    {
+        "title": "Sala Agustín Tosco - Luz y Fuerza - Bº Centro",
+        "address": "Deán Funes 672 - Guemes",
+        "how to get to": ""
+        
+    },
+    {
+        "title": "Sala de Las Américas",
+        "address":"Av. Haya de la Torre S/N - Ciudad Universitaria",
+        "how to get to": ""
+    },
+    {
+        "title": "Studio Theater",
+        "address": "Rosario de Santa Fe 272 - Centro",
+        "how to get to": ""
+    },
+    {
+        "title":  "Casa Babylon",
+        "address": "Bv. Las Heras 48 - Ex Abasto",
+        "how to get to": ""
+    }
+
+]
+
