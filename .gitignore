@@ -1,1 +1,4 @@
 node_modules
+cypress/fixtures/profile.json
+cypress/fixtures/users.json
+cypress/videos/
