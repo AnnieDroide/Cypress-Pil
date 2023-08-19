@@ -14,7 +14,7 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
     //Función para desloguearse
   });
 
-  it("Verificar subtitulos", () => {
+  it("Verificar subtitulos", { tags: "@regression" }, () => {
     edenHome2.getSubTitles().first().should("contain.text", "BUSCAR EVENTO");
     edenHome2
       .getSubTitles()

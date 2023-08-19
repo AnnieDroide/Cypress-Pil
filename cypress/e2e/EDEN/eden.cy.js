@@ -22,7 +22,7 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
   afterEach(() => {
     //Función para desloguearse
   });
-  it("Verificar subtitulos", () => {
+  it("Verificar subtitulos", { tags: "@regression" }, () => {
     const txtBuscar = "BUSCAR EVENTO";
     const txtCalendar = "CALENDARIO DE EVENTOS";
 
@@ -30,7 +30,7 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
     edenHome.getSubTitles().last().should("contain.text", txtCalendar);
   });
 
-  it("verificar menu", () => {
+  it("verificar menu", { tags: ["@regression", "@smoke"] }, () => {
     const menuBtn = [
       "HOME",
       "TODOS",
@@ -90,7 +90,7 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
     edenHeader.getImageNavbar().should("be.visible");
   });
 
-  it.only("Validación del calendario", () => {
+  it("Validación del calendario", () => {
     const [dia, mes, anio] = utils.getCompleteDate();
 
     //cy.log(fechaActual);
@@ -110,6 +110,7 @@ describe("Test sobre la página EDEN ENTRADAS", () => {
             "have.class",
             "ui-datepicker-unselectable ui-state-disabled"
           );
+          cy.log(`El día ${$index} es no seleccionable`);
         }
       });
   });
