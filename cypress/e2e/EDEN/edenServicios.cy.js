@@ -23,4 +23,20 @@ describe("TEST DE SERVICIO DE EDEN", () => {
       expect(respuesta.status).to.eq(200);
     });
   });
+
+  it.only("Verificar Servicio de INICIO 3", () => {
+    cy.request({
+      method: "GET",
+      url: "https://edenapi.edenentradas.com.ar/edenventarestapi/api/contenido/inicio",
+    }).then((respuesta) => {
+      cy.log(`Respuesta del servicio de Inicio: ${JSON.stringify(respuesta)}`);
+
+      cy.writeFile(
+        `cypress/fixtures/autogenerado/eventos.json`,
+        respuesta.body
+      );
+      expect(respuesta.status).to.eq(200);
+      cy.validarSchema(`eventos_schema`, "eventos");
+    });
+  });
 });
