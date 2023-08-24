@@ -67,7 +67,7 @@ describe("TEST DE SERVICIO DE EDEN", () => {
     );
   });
 
-  it.only("Verificar Servicio de Cuartetos 4BIS - Validar tipo de datos", () => {
+  it("Verificar Servicio de Cuartetos 4BIS - Validar tipo de datos", () => {
     cy.callServiceCheck(
       "GET",
       "https://edenapi.edenentradas.com.ar/edenventarestapi/api/contenido/eventos/cuartetos",
