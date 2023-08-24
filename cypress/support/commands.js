@@ -27,6 +27,10 @@
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
+/**
+ * Abre la URL en tamaño de pantalla desktop o mobile
+ * @method {openWeb}
+ */
 Cypress.Commands.add("openWeb", () => {
   let tamPantalla;
 
@@ -40,6 +44,13 @@ Cypress.Commands.add("openWeb", () => {
   cy.visit("/");
 });
 
+/**
+ * Valida la estructura de datos del servicio
+ * @method validarSchema
+ * @param {string} schemaName - Nombre del archivo que está en la carpeta de fixtures/schemas
+ *  correspondiente al archivo que posee la estructura de datos del servicio que se desea validar
+ * @param {string} servicioName - Nombre del archivo que está en la carpeta de fixtures/autogenerado
+ */
 Cypress.Commands.add("validarSchema", (schemaName, servicioName) => {
   cy.fixture(`schemas/${schemaName}.json`).then((schema) => {
     cy.fixture(`autogenerado/${servicioName}.json`).then((dataServicio) => {
@@ -56,3 +67,31 @@ Cypress.Commands.add("validarSchema", (schemaName, servicioName) => {
     });
   });
 });
+/**
+ * Llama a un servicio y verifica la estructura de datos
+ * @method callServiceCheck
+ * @param {String} meth - Método: GET/POST/PUT, etc.
+ * @param {String} completeUrl - Endpoint que se desa verificar
+ * @param {String} schema - Nombre del Esquema de Servicio
+ * @param {String} fileName - Nombre del archivo que se autogenera con la respuesta del servicio
+ */
+Cypress.Commands.add(
+  "callServiceCheck",
+  (meth, completeUrl, schema, fileName) => {
+    cy.request({
+      method: meth,
+      url: completeUrl,
+    }).then((respuesta) => {
+      cy.log(
+        `Respuesta del servicio de ${fileName}: ${JSON.stringify(respuesta)}`
+      );
+
+      cy.writeFile(
+        `cypress/fixtures/autogenerado/${fileName}.json`,
+        respuesta.body
+      );
+      expect(respuesta.status).to.eq(200);
+      cy.validarSchema(schema, fileName);
+    });
+  }
+);
