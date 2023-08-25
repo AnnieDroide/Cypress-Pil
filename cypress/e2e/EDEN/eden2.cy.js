@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
-const edenHome2 = require("../../Page/edenHome2");
-const edenHeader2 = require("../../Page/edenHeader2");
+const edenHome2 = require("../../Page/EDEN/edenHome2");
+const edenHeader2 = require("../../Page/EDEN/edenHeader2");
 
 describe("Test sobre la página EDEN ENTRADAS", () => {
   beforeEach(() => {
