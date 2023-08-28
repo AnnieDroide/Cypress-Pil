@@ -2,9 +2,10 @@
 const yvytuHome = require("../../Page/Yvytu/yvytuHome");
 
 describe("Tests sobre la página de YVYTU", () => {
-  it("Verifica Barra de Navagación - Iterar en Botones pildora", () => {
+  beforeEach(() => {
     cy.visit("https://vientosdelaselva.com.ar/");
-
+  });
+  it("Verifica Barra de Navagación - Iterar en Botones pildora", () => {
     const menu = ["LA RESERVA", "CABAÑAS", "COMO LLEGAR", "CONTACTO", "DONÁ"];
 
     yvytuHome.getMenuPillButton().each((boton, indice) => {
@@ -12,9 +13,7 @@ describe("Tests sobre la página de YVYTU", () => {
     });
   });
 
-  it.only("Verifica Barra de Navagación 2 - Iterar en Botones", () => {
-    cy.visit("https://vientosdelaselva.com.ar/");
-
+  it("Verifica Barra de Navagación 2 - Iterar en Botones", () => {
     const menu = [
       "",
       "LA RESERVA",
@@ -24,10 +23,32 @@ describe("Tests sobre la página de YVYTU", () => {
       "DONÁ",
     ];
 
-    yvytuHome.getMenuAllButton().each((boton, indice) => {
+    yvytuHome.getMenuAllButtons().each((boton, indice) => {
       if (indice != 0) {
         cy.wrap(boton).should("have.text", menu[indice]);
       }
+    });
+  });
+
+  it.only("Verificar comportamiento  del Botón Ir Arriba", () => {
+    yvytuHome.getIrArribaButton().should("not.be.visible");
+    yvytuHome
+      .getGenericSubtitle()
+      .contains("Conocé una historia mágica.")
+      .scrollIntoView();
+
+    yvytuHome
+      .getIrArribaButton()
+      .should("be.visible")
+      .and("contain.text", "Ir arriba")
+      .click();
+
+    /**yvytuHome.getIrArribaButton().should("be.visible");
+    yvytuHome.getIrArribaButton().should("contain.text", "Ir arriba");
+    yvytuHome.getIrArribaButton().click();**/
+
+    yvytuHome.getMenuPillButton().each((boton, indice) => {
+      cy.wrap(boton).should("be.visible");
     });
   });
 });
