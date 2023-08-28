@@ -30,7 +30,7 @@ describe("Tests sobre la página de YVYTU", () => {
     });
   });
 
-  it.only("Verificar comportamiento  del Botón Ir Arriba", () => {
+  it("Verificar comportamiento  del Botón Ir Arriba", () => {
     yvytuHome.getIrArribaButton().should("not.be.visible");
     yvytuHome
       .getGenericSubtitle()
