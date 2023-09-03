@@ -9,6 +9,15 @@ class YvytuHome {
   }
 
   //Banner de Imágenes
+  getImagenesBanner() {
+    return cy.get(
+      `[class*= "bg-[url('/public/images/header-gallery/"]:visible`
+    );
+  }
+
+  getImgButton() {
+    return cy.get("[id^=slick-slide-control2]");
+  }
 
   getGenericSubtitle() {
     return cy.get("h2");

@@ -30,6 +30,19 @@ describe("Tests sobre la página de YVYTU", () => {
     });
   });
 
+  it.only("Verificar Imagenes del Banner Principal", () => {
+    /*yvytuHome.getImagenesBanner().each((imagen) => {
+      cy.wrap(imagen).should("exist");
+    });*/
+    yvytuHome.getImagenesBanner().eq(0).should("be.visible");
+    yvytuHome.getImgButton().eq(1).click();
+    yvytuHome.getImagenesBanner().eq(1).should("be.visible");
+    yvytuHome.getImgButton().eq(2).click();
+    yvytuHome.getImagenesBanner().eq(2).should("be.visible");
+    yvytuHome.getImgButton().last().click();
+    yvytuHome.getImagenesBanner().eq(3).should("be.visible");
+  });
+
   it("Verificar comportamiento  del Botón Ir Arriba", () => {
     yvytuHome.getIrArribaButton().should("not.be.visible");
     yvytuHome
@@ -70,7 +83,7 @@ describe("Tests sobre la página de YVYTU", () => {
       );
   });
 
-  it.only("Verificar Reel de Imágenes", () => {
+  it("Verificar Reel de Imágenes", () => {
     let arrayImagenes = [
       "frase01.png",
       "noche.png",
