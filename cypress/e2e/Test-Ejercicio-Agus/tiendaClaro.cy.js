@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe("TESTS DE SERVICIO TIENDA CLARO", () => {
-  it.only("Verificar Servicio de Productos Destacados", () => {
+  it("Verificar Servicio de Productos Destacados", () => {
     cy.request({
       method: "GET",
       url: "https://tienda.claro.com.ar/api/contentManagement?content=Productos_destacados_spot",
