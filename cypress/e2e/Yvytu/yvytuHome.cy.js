@@ -30,17 +30,33 @@ describe("Tests sobre la página de YVYTU", () => {
     });
   });
 
-  it.only("Verificar Imagenes del Banner Principal", () => {
+  it("Verificar Imagenes del Banner Principal", () => {
     /*yvytuHome.getImagenesBanner().each((imagen) => {
       cy.wrap(imagen).should("exist");
     });*/
-    yvytuHome.getImagenesBanner().eq(0).should("be.visible");
-    yvytuHome.getImgButton().eq(1).click();
-    yvytuHome.getImagenesBanner().eq(1).should("be.visible");
-    yvytuHome.getImgButton().eq(2).click();
-    yvytuHome.getImagenesBanner().eq(2).should("be.visible");
-    yvytuHome.getImgButton().last().click();
-    yvytuHome.getImagenesBanner().eq(3).should("be.visible");
+    const bannerList = ["01.png", "02.png", "03.png", "04.png"];
+
+    bannerList.forEach((banner, inx) => {
+      yvytuHome
+        .getCurrentImageBanner()
+        .should(
+          "have.class",
+          `bg-[url('/public/images/header-gallery/${banner}')]`
+        );
+
+      yvytuHome
+        .getImgButton()
+        .its("length")
+        .then((cantidad) => {
+          if (cantidad != inx + 1) {
+            yvytuHome
+              .getImgButton()
+              .eq(inx + 1)
+              .click();
+            cy.wait(1000);
+          }
+        });
+    });
   });
 
   it("Verificar comportamiento  del Botón Ir Arriba", () => {
@@ -64,6 +80,45 @@ describe("Tests sobre la página de YVYTU", () => {
       cy.wrap(boton).should("be.visible");
     });
     yvytuHome.getIrArribaButton().should("not.be.visible");
+  });
+
+  it.only("Verificar textos de la página", () => {
+    let inxPar = 0;
+
+    cy.fixture("textos_yvytu").then((txt_yvytu) => {
+      //Se toma cada elemento definido dentro del arrayJson que está en fixtures
+      txt_yvytu.forEach((elTexto, inx) => {
+        cy.log(`**VALIDACIÓN DEL TITULO: ${inx + 1}**`);
+        let yvyTitulo = elTexto.titulo;
+        //Se splitea el título del JSON con espacio para tomar cada palabra individual
+        yvyTitulo = yvyTitulo.split(" ");
+        yvyTitulo.forEach((palabra) => {
+          yvytuHome
+            .getGenericSubtitle()
+            .eq(inx + 1)
+            .should("contain.text", palabra);
+        });
+
+        //Verificar Párrafos
+        let yvyParrafos = elTexto.parrafos;
+        //"Parrafos" en el json contiene multiples parrafos
+        yvyParrafos.forEach((elParrafo) => {
+          cy.log(`Validar Parrafo ${inxPar}: ${elParrafo}`);
+
+          yvytuHome
+            .getGenericParagraph()
+            .eq(inxPar)
+            .invoke("text")
+            .then((parr) => {
+              cy.log(`Parrafo sin modificar: ${parr}`);
+              parr = parr.replace(/\s+/g, " ").trim();
+              cy.log(`Parrafo modificado: ${parr}`);
+              expect(parr).to.include(elParrafo);
+            });
+          inxPar++;
+        });
+      });
+    });
   });
 
   it("Verificar botón Reservar", () => {
@@ -137,5 +192,22 @@ describe("Tests sobre la página de YVYTU", () => {
       .getImgCabaniaArasari()
       .should("have.attr", "src", "./public/images/cabana-gallery/01.png")
       .and("have.attr", "alt", "Imagen 1");
+  });
+
+  it("Verificar botón Donar", () => {
+    yvytuHome
+      .getGenericButton()
+      .contains("Donar")
+      .should("have.attr", "href", "https://cafecito.app/reserva-yvytu")
+      .and("have.attr", "target", "_blank");
+
+    yvytuHome
+      .getGenericButton()
+      .contains("Donar")
+      .should(
+        "have.css",
+        "Background",
+        "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box"
+      );
   });
 });

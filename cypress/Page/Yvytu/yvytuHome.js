@@ -9,6 +9,13 @@ class YvytuHome {
   }
 
   //Banner de Imágenes
+
+  getCurrentImageBanner() {
+    return cy.get(
+      `[class^="w-full h-600 bg-[url('/public/images/header-gallery/"][class*="slick-current"]`
+    );
+  }
+
   getImagenesBanner() {
     return cy.get(
       `[class*= "bg-[url('/public/images/header-gallery/"]:visible`
@@ -16,8 +23,12 @@ class YvytuHome {
   }
 
   getImgButton() {
-    return cy.get("[id^=slick-slide-control2]");
+    return cy.get("ul").first().find("li button");
   }
+
+  /*getImgButton() {
+    return cy.get("[id^=slick-slide-control2]");
+  }*/
 
   getGenericSubtitle() {
     return cy.get("h2");
@@ -28,6 +39,10 @@ class YvytuHome {
   }
 
   //Sección de Textos
+
+  getGenericParagraph() {
+    return cy.get(".text-justify p");
+  }
 
   //Botón Ir Arriba
   getIrArribaButton() {
