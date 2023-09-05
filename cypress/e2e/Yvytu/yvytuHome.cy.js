@@ -82,7 +82,7 @@ describe("Tests sobre la página de YVYTU", () => {
     yvytuHome.getIrArribaButton().should("not.be.visible");
   });
 
-  it.only("Verificar textos de la página", () => {
+  it("Verificar textos de la página", () => {
     let inxPar = 0;
 
     cy.fixture("textos_yvytu").then((txt_yvytu) => {
