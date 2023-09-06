@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
+    "delete:reports": "del /f /s /q \"cypress/reports\" 1>nul",
     "cypress:open:desktop": "npx cypress open --e2e --browser chrome -e type=desktop",
     "cypress:open:mobile": "npx cypress open --e2e --browser chrome -e type=mobile",
     "cypress:open:edge:desktop": "npx cypress open --e2e --browser edge -e type=desktop,grepTags=@regression",
     "cypress:open:edge:mobile": "npx cypress open --e2e --browser edge -e type=mobile",
-    "cypress:run:eden": "npx cypress run --e2e --browser chrome --spec cypress/e2e/EDEN",
-    "cypress:run:edge": "npx cypress run --e2e --browser edge --spec cypress/e2e/EDEN"
+    "cypress:run:eden": "npm run delete:reports && npx cypress run --e2e --browser chrome --spec cypress/e2e/EDEN",
+    "cypress:run:eden1": "npm run delete:reports && npx cypress run --e2e --browser chrome --spec cypress/e2e/EDEN/eden.cy.js",
+    "cypress:run:edge": "npm run delete:reports && npx cypress run --e2e --browser edge --spec cypress/e2e/EDEN"
   },
   "keywords": [
     "cypress",
@@ -21,7 +23,8 @@
   "author": "Annie",
   "license": "ISC",
   "dependencies": {
-    "ajv": "^8.12.0"
+    "ajv": "^8.12.0",
+    "cypress-mochawesome-reporter": "^3.5.1"
   },
   "devDependencies": {
     "@bahmutov/cy-grep": "^1.9.16",
