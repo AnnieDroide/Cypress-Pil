@@ -3,3 +3,7 @@ cypress/fixtures/profile.json
 cypress/fixtures/users.json
 cypress/videos/
 cypress/fixtures/autogenerado
+cypress/reports
+cypress/downloads
+cypress/screenshots
+
