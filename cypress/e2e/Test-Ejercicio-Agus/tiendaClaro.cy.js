@@ -18,4 +18,22 @@ describe("TESTS DE SERVICIO TIENDA CLARO", () => {
       expect(respuesta.status).to.eq(200);
     });
   });
+
+  it("Verficar Servicio de Celulares Header", () => {
+    cy.request({
+      method: "GET",
+      url: "https://tienda.claro.com.ar/api/contentManagement?content=CelularesHeader_Spot",
+    }).then((respuesta) => {
+      cy.log(
+        `Respuesta del servicio de Celulares Header: ${JSON.stringify(
+          respuesta
+        )}`
+      );
+      cy.writeFile(
+        `cypress/fixtures/autogenerado/servicios.json`,
+        respuesta.body
+      );
+      expect(respuesta.status).to.eq(200);
+    });
+  });
 });
