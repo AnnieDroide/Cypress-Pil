@@ -19,7 +19,7 @@ describe("TESTS DE SERVICIO TIENDA CLARO", () => {
     });
   });
 
-  it.only("Verficar Servicio de Celulares Header", () => {
+  it("Verficar Servicio de Celulares Header", () => {
     cy.request({
       method: "GET",
       url: "https://tienda.claro.com.ar/api/contentManagement?content=CelularesHeader_Spot",
