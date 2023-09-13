@@ -210,4 +210,22 @@ describe("Tests sobre la página de YVYTU", () => {
         "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box"
       );
   });
+
+  it("Visual Testing de Yvytu usando Snapshot", () => {
+    cy.compareSnapshot("home-page");
+  });
+
+  it("Visual Testing de Yvytu usando Snapshot en un elemento", () => {
+    yvytuHome.getMenuPillButton().parent().compareSnapshot("botones");
+  });
+
+  it.only("Visual testing del botón Ir Arriba", () => {
+    yvytuHome
+      .getIrArribaButton()
+      .should(
+        "have.css",
+        "background",
+        "rgb(34, 153, 84) none repeat scroll 0% 0% / auto padding-box border-box"
+      );
+  });
 });
