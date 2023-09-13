@@ -219,7 +219,7 @@ describe("Tests sobre la página de YVYTU", () => {
     yvytuHome.getMenuPillButton().parent().compareSnapshot("botones");
   });
 
-  it.only("Visual testing del botón Ir Arriba", () => {
+  it("Visual testing del botón Ir Arriba", () => {
     yvytuHome
       .getIrArribaButton()
       .should(
